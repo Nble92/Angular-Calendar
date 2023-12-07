@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-family: '8-bit-hud', sans-serif;
+    color: bisque;
+    background-color: black;
+    -webkit-background-clip: image; /* for WebKit/Blink browsers */
+  background-clip: text;
+}
+
+
+.fc-day-today {
+    background: url('/assets/firegif.gif') center center no-repeat;
+    background-size: 350% 400%; /* or contain, depending on your preference */
+    background-position: 62% 50%;
+    opacity: 100%;
+}
+
+
+.fc-header-toolbar{
+
+    background: url('/assets/snow.gif') center center no-repeat;
+    background-size: cover;
+    padding-bottom: 100px;
+}

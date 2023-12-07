@@ -1,0 +1,9 @@
+@font-face {
+    font-family: '8-bit-hud';
+    src: url('8-bit-hud.ttf') format('truetype'),
+    /* Add more src lines if your font has different file formats (e.g., .ttf) */
+  }
+
+body {
+    font-family: '8-bit-hud', sans-serif;
+}
