@@ -30,10 +30,14 @@ export class Cal2Component {
     if (this.calendarComponent) {
       this.calendarApi = await this.calendarComponent.getApi();
   //     // Now you can use this.calendarApi as needed
-    }
+    }  
     const currentDate = this.calendarApi.getDate();
 
     alert(currentDate)
+
+
+      
+    
 
   }
 
@@ -43,6 +47,7 @@ export class Cal2Component {
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
+
 
 
   // Other methods or properties...
