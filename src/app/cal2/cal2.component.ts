@@ -1,7 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-cal2',
@@ -9,46 +8,42 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
   styleUrls: ['./cal2.component.css']
 })
 export class Cal2Component {
-
-  @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
-
-  calendarApi: any; // Adjust the type as needed
-
   calendarOptions: CalendarOptions = {
     plugins: [dayGridPlugin],
     initialView: 'dayGridMonth',
     weekends: true,
-    events: []
+    events: [],
+    datesSet: this.onDatesSet.bind(this), // Detect month changes
   };
 
-  constructor() {
-  //   // Initialize calendarApi within the constructor or another lifecycle hook
-    this.testCalendarApi();
+  backgroundStyle: string = ''; // Holds the dynamic background CSS property value
+
+  constructor() {}
+
+  onDatesSet(): void {
+    // Get the month from the toolbar
+    const toolbarTitle = document.querySelector('.fc-toolbar-title')?.textContent || '';
+    const firstWord = toolbarTitle.split(' ')[0]; // Extract the first word
+    console.log(firstWord); // Debug to verify the extracted word
+        const monthName = this.extractMonthFromToolbar(toolbarTitle);
+
+    if (monthName) {
+      this.updateBackground(monthName);
+    }
   }
 
-   private async testCalendarApi() {
-    if (this.calendarComponent) {
-      this.calendarApi = await this.calendarComponent.getApi();
-  //     // Now you can use this.calendarApi as needed
-    }  
-    const currentDate = this.calendarApi.getDate();
+  extractMonthFromToolbar(toolbarTitle: string): string | null {
+    // Extract the month from the toolbar title, e.g., "January 2025"
+    const monthRegex = /^(January|February|March|April|May|June|July|August|September|October|November|December)/i;
+    const match = toolbarTitle.match(monthRegex);
 
-    alert(currentDate)
-
-
-      
-    
-
+    return match ? match[0].toLowerCase() : null; // Return the lowercase month name
   }
 
-  // Rest of your component code...
-
-  monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-
-
-
-  // Other methods or properties...
+  updateBackground(monthName: string): void {
+    document.body.style.background = `url('/assets/${monthName}.gif') center center no-repeat`;
+    document.body.style.backgroundSize = 'cover'; // Ensure it covers the entire page
+    document.body.style.margin = '0'; // Remove default margin to avoid gaps
+  }
+  
 }

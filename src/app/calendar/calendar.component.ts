@@ -1,4 +1,3 @@
-// calendar.component.ts
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class CalendarComponent implements OnInit {
   currentDate: Date = new Date();
   daysInMonth: Date[] = [];
+  backgroundUrl: string = '/assets/snow.gif'; // Default background
 
   ngOnInit() {
     this.currentDate = new Date();
     this.generateCalendar();
+    this.setDynamicBackground(); // Set the initial background
   }
 
   generateCalendar() {
@@ -39,28 +40,33 @@ export class CalendarComponent implements OnInit {
   nextMonth() {
     this.currentDate.setMonth(this.currentDate.getMonth() + 1);
     this.generateCalendar();
+    this.setDynamicBackground(); // Update background on month change
   }
 
   prevMonth() {
     this.currentDate.setMonth(this.currentDate.getMonth() - 1);
     this.generateCalendar();
+    this.setDynamicBackground(); // Update background on month change
   }
-  currentMonth(){
-const monthNames = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
 
-return monthNames[this.currentDate.getMonth()]
+  currentMonth() {
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    return monthNames[this.currentDate.getMonth()];
   }
-//  isCday() {
-//     if (!this.currentDate || !this.daysInMonth || this.daysInMonth.length === 0) {
-//       // Add appropriate handling or return false if necessary data is not available
-//       return false;
-//     }
 
-//     let day: number; // You need to assign a value to 'day' before using it
+  setDynamicBackground() {
+    const month = this.currentDate.getMonth();
+    const backgrounds = [
+      '/assets/january.gif', '/assets/february.gif', '/assets/march.gif',
+      '/assets/april.gif', '/assets/may.gif', '/assets/june.gif',
+      '/assets/july.gif', '/assets/august.gif', '/assets/september.gif',
+      '/assets/october.gif', '/assets/november.gif', '/assets/december.gif'
+    ];
 
-//     return this.daysInMonth[day].getDate() === this.currentDate.getDate();
-//   }
+    this.backgroundUrl = backgrounds[month]; // Set the background based on the current month
+  }
 }
