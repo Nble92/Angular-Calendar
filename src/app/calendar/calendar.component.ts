@@ -61,8 +61,7 @@ export class CalendarComponent implements OnInit {
   setDynamicBackground() {
     const month = this.currentDate.getMonth();
     const backgrounds = [
-      '/assets/january.gif', '/assets/february.gif', '/assets/march.gif',
-      '/assets/april.gif', '/assets/may.gif', '/assets/june.gif',
+      '/assets/january.gif', '/assets/february.gif', '/assets/march.gif', '/assets/april.gif', '/assets/may.gif', '/assets/june.gif',
       '/assets/july.gif', '/assets/august.gif', '/assets/september.gif',
       '/assets/october.gif', '/assets/november.gif', '/assets/december.gif'
     ];
